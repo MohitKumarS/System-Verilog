@@ -1,0 +1,21 @@
+// Code your design here
+module d_ff ( input d, clk,rstn,output reg q,qb);
+  wire w1,w2;
+  two_one_mux f0(s,w1,d,w1);
+  two_one_mux f1(~s,w2,w1,w2);
+  assign qb =~ q;
+  assign q = w2
+endmodule
+
+module two_one_mux(s,i0,i1,y);
+  output reg y;
+  input i0,i1,s;
+  always @(s)
+    begin
+      case({s})
+        1'b0 : begin y = i0; end
+        1'b1 : begin y = i1; end
+      endcase
+    end
+endmodule
+        
