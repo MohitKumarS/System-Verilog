@@ -1,0 +1,26 @@
+// Code your testbench here
+// or browse Examples
+module d_ff_tb;
+  reg d, clk, rstn;	
+  wire q, qb;
+  d_ff f0 ( d, clk, rstn, q, qb); 
+  always 
+    #5 clk <= ~clk;
+  initial begin
+    {clk,rstn, d} <= 0;
+    $dumpfile("d_ff_tb.vcd");
+    $dumpvars(1, d_ff_tb);
+    $monitor("The Values are given by d=%b, q=%b, qb=%b",d,q,qb);
+    #10 rstn <= 1;	d=0;
+    #8 d=1;
+    #8 d=0;
+    #8 d=1;
+    #8 d=0;
+    #8 d=1;
+    #8 d=0;
+    #4 rstn=0;
+    #8 d=1;
+    #8 d=0;
+    #2	$finish; 
+  end 
+endmodule
